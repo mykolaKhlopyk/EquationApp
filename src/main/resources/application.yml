@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${url}
+    username: ${username}
+    password: ${password}
+  jpa:
+    generate-ddl: true
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+  config:
+    import: keys.properties
+
+server:
+  port: ${port}
