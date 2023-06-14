@@ -1,5 +1,6 @@
 package com.mkh.equationapp.domain;
 
+import com.mkh.equationapp.domain.exceptions.InputException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,30 @@ public class Equation {
     @Column(name = "right_part")
     private String rightPart;
 
-    @OneToMany(mappedBy = "equation", cascade = CascadeType.REMOVE )
+    @Column(name = "poland_left_part")
+    private String polandLeftPart;
+
+    @Column(name = "poland_right_part")
+    private String polandRightPart;
+
+    @OneToMany(mappedBy = "equation", cascade = CascadeType.REMOVE)
     private List<Root> roots;
+
+    public Equation(String fullEquation) {
+        splitEquation(fullEquation);
+        polandLeftPart = Converter.getPolandForm(leftPart);
+        polandRightPart = Converter.getPolandForm(rightPart);
+    }
+
+    private void splitEquation(String fullEquation) {
+        String[] parts = fullEquation.split("=");
+        if (parts.length != 2) {
+            throw new InputException();
+        }
+        leftPart = parts[0];
+        rightPart = parts[1];
+    }
+
+
+
 }
