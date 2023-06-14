@@ -15,6 +15,12 @@ public class ConverterTest {
         assertEquals("2 2 + 3 +", Converter.getPolandForm("(2+ 2+3)"));
         assertEquals("3 3 * 4 5 5 + * +", Converter.getPolandForm("3*3+ 4*(5+5)"));
     }
+  @Test
+    public void testWithRootsCorrectConvertToPoland(){
+        assertEquals("2 x +", Converter.getPolandForm("2+x"));
+        assertEquals("x x * 5 2 4 + / +", Converter.getPolandForm("x*x+5/(2+4)"));
+        assertEquals("2 x + x + x * x / 0 +", Converter.getPolandForm("((2+x)+x)*x/x+0"));
+    }
 
 
     @Test
