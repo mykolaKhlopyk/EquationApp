@@ -64,8 +64,8 @@ public class Converter {
                 result.append(number);
                 result.append(" ");
                 i+=number.length()-1;
-            } else if (currentChar == 'x') {
-                result.append(currentChar);
+            } else if (currentChar == 'x' || currentChar == 'х') {
+                result.append('x');
                 result.append(" ");
             } else if (currentChar == '(') {
                 operators.push(currentChar);
