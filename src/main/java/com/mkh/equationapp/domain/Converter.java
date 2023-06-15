@@ -60,8 +60,10 @@ public class Converter {
             char currentChar = equation.charAt(i);
 
             if (Character.isDigit(currentChar)) {
-                result.append(readNextNumber(equation, i));
+                String number = readNextNumber(equation, i).toString();
+                result.append(number);
                 result.append(" ");
+                i+=number.length()-1;
             } else if (currentChar == 'x') {
                 result.append(currentChar);
                 result.append(" ");
