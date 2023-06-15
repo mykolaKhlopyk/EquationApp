@@ -39,7 +39,7 @@ public class Converter {
                         && !(str.charAt(i) != ')' && str.charAt(i + 1) == '(')
                         && !(str.charAt(i) == '(' && str.charAt(i + 1) == '-')
                 )
-                    throw new InputException("Два неприпустимі оператори по сусідству");
+                    throw new InputException("Some operators are too close");
             }
         }
         checkSignsAtTheEdge(str);
@@ -48,7 +48,7 @@ public class Converter {
     private static void checkSignsAtTheEdge(String str) {
         if ((isOperator(str.charAt(0)) && !(str.charAt(0) == '('))
                 || (isOperator(str.charAt(str.length() - 1)) && !(str.charAt(str.length() - 1) == ')')))
-            throw new InputException("Неприпустимий оператор");
+            throw new InputException("Incorrect operator");
     }
 
     private static String buildPolandForm(String equation) {
@@ -72,13 +72,13 @@ public class Converter {
             } else if (isOperator(currentChar)) {
                 readOperator(equation, i, operators, result);
             } else {
-                throw new InputException("Некоректний символ");
+                throw new InputException("Incorrect symbol");
             }
         }
 
         while (!operators.isEmpty()) {
             if (operators.peek() == '(') {
-                throw new InputException("Некоректна розстановка дужок");
+                throw new InputException("Brackets are incorrect");
             }
             result.append(operators.pop());
             result.append(" ");
@@ -108,7 +108,7 @@ public class Converter {
             result.append(" ");
         }
         if (!operators.isEmpty() && operators.peek() != '(') {
-            throw new IllegalArgumentException("Некоректна розстановка дужок");
+            throw new IllegalArgumentException("Brackets are incorrect");
         }
         operators.pop();
     }

@@ -44,7 +44,7 @@ public class Equation {
     private void splitEquation(String fullEquation) {
         String[] parts = fullEquation.split("=");
         if (parts.length != 2) {
-            throw new InputException();
+            throw new InputException("Check operator '='");
         }
         leftPart = parts[0];
         rightPart = parts[1];
