@@ -14,8 +14,11 @@ public class ConverterTest {
         assertEquals("2 2 +", Converter.getPolandForm("2+2"));
         assertEquals("2 2 + 3 +", Converter.getPolandForm("(2+ 2+3)"));
         assertEquals("3 3 * 4 5 5 + * +", Converter.getPolandForm("3*3+ 4*(5+5)"));
-        assertEquals("x 4 1 - 4 + * +", Converter.getPolandForm("x+4*(-1+4)"));
-        assertEquals("-1 x * 4 + ", Converter.getPolandForm("-x+4"));
+        assertEquals("x 4 -1 1 * 4 + * +", Converter.getPolandForm("x+4*(-1+4)"));
+        assertEquals("-1 1 * x * 4 +", Converter.getPolandForm("-x+4"));
+        assertEquals("-1 1 * 1.3 * 5 * x /", Converter.getPolandForm("-1.3*5/x"));
+        assertEquals("2 x *", Converter.getPolandForm("2*x"));
+        assertEquals("2 x * 5 + x + 5 +", Converter.getPolandForm("2*x+5+x+5"));
     }
   @Test
     public void testWithRootsCorrectConvertToPoland(){
