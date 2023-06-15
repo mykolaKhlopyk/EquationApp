@@ -50,6 +50,8 @@ public class Equation {
         rightPart = parts[1];
     }
 
-
-
+    @Override
+    public String toString() {
+        return leftPart + " = " + rightPart;
+    }
 }
