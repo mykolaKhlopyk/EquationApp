@@ -1,6 +1,7 @@
 package com.mkh.equationapp.controller;
 
 import com.mkh.equationapp.domain.Equation;
+import com.mkh.equationapp.domain.exceptions.InputException;
 import com.mkh.equationapp.service.EquationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -38,16 +39,29 @@ public class EquationController {
     }
 
     @GetMapping("/{id}/roots")
-    public String getEquationRoots(@PathVariable("id")long id, Model model){
+    public String getEquationPage(@PathVariable("id")long id, @RequestParam(value = "error", required = false) String error, Model model){
         Equation equation = equationService.getEquationById(id);
+        model.addAttribute("error", error);
         model.addAttribute("equation", equation);
         return "show-equation";
     }
 
-    @DeleteMapping("/{equation_id}/roots/{root_id}")
+    @PostMapping("/{equation_id}/roots/{root_id}")
     public String deleteRoot(@PathVariable("equation_id")long equation_id, @PathVariable("root_id")long root_id){
         equationService.deleteRoot(root_id);
-        return "redirect: /equation/"+equation_id+"/roots";
+        return "redirect:/equation/"+equation_id+"/roots";
+    }
+
+    @PostMapping("/{equation_id}/roots")
+    public String addRoot(@PathVariable("equation_id")long equation_id, @ModelAttribute("newRoot") String newRootStr){
+        try{
+            equationService.addRoot(equation_id, newRootStr);
+        }catch (NumberFormatException exception){
+            return "redirect:/equation/"+equation_id+"/roots?error=input correct number!";
+        }catch (InputException exception){
+            return "redirect:/equation/"+equation_id+"/roots?error="+exception.getMessage();
+        }
+        return "redirect:/equation/"+equation_id+"/roots";
     }
 
 
