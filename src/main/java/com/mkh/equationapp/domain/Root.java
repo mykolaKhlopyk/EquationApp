@@ -13,9 +13,10 @@ public class Root {
     private long id;
 
     @Column(name = "value")
-    private long value;
+    private double value;
 
     @ManyToOne
     @JoinColumn(name = "equation_id", referencedColumnName = "id")
     private Equation equation;
+
 }
