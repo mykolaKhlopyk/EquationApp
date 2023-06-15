@@ -22,6 +22,8 @@ public class CalculatorTest {
                 checkCorrectionRootForEquation(new Equation("2+2=4"), 1));
         assertTrue(
                 checkCorrectionRootForEquation(new Equation("x=9"), 9));
+        assertTrue(
+                checkCorrectionRootForEquation(new Equation("4*-7+x = -28"), 0));
     }
 
     private boolean checkCorrectionRootForEquation(Equation equation, double root) {
