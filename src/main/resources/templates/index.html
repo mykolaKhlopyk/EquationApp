@@ -5,12 +5,13 @@
     <title>All equations</title>
 </head>
 <body>
+<div th:replace="header"></div>
 <table style="border-width: 3px">
     <tr th:each="equation, iStat: ${equations}">
         <td th:text="${iStat.index + 1}"/>
         <td th:text="${equation}"/>
         <td>
-            <a th:href="@{|/equation/${equation.id}/roots/|}" >Roots</a>
+            <a th:href="@{|/equation/${equation.id}/roots|}" >Roots</a>
         </td>
     </tr>
 </table>

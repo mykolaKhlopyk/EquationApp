@@ -5,17 +5,23 @@
     <title>Title</title>
 </head>
 <body>
+<div th:replace="header"></div>
 <h3 th:text="'Equation: ' + ${equation}"></h3>
 <table>
     <tr th:each="root, iStat: ${equation.getRoots()}">
         <td th:text="${iStat.index + 1}"/>
-        <td th:text="${root}"/>
+        <td th:text="${root.value}"/>
         <td>
-            <form th:method="DELETE" th:action="@{|/equation/${equation.id}/roots/${root.id}|}">
+            <form th:method="post" th:action="@{|/equation/${equation.id}/roots/${root.id}|}">
                 <input type="submit" value="Delete">
             </form>
         </td>
     </tr>
 </table>
+
+<form th:method="POST" th:action="@{|/equation/${equation.id}/roots|}">
+    <input type="text" name="newRoot">
+    <span th:if="${error != null} " th:text="${error}"></span>
+</form>
 </body>
 </html>

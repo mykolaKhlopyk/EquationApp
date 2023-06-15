@@ -5,7 +5,7 @@
     <title>Input equation</title>
 </head>
 <body>
-
+<div th:replace="header"></div>
 <form th:action="@{/equation/input}" method="post">
     <input type="text" name="equationStr">
     <span th:if="${error != null} " th:text="${error}"></span>
