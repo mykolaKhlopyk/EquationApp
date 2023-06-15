@@ -29,7 +29,7 @@ public class Converter {
     private static String getFormWithSolvedProblemsByMinuses(String str) {
         if (str.charAt(0) == '-')
             str = "(-1)*" + str.substring(1);
-        return str.replace("+-", "-").replace("/-", "/(-1)/").replace("*-", "*(-1)*");
+        return str.replace("+-", "-").replace("/-", "/(-1)/").replace("*-", "*(-1)*").replace("(-", "((-1)*");
     }
 
     private static void checkSigns(String str) {
@@ -70,6 +70,11 @@ public class Converter {
             } else if (currentChar == ')') {
                 closeBrackets(operators, result);
             } else if (isOperator(currentChar)) {
+                if (currentChar == '-' && i + 3 < equation.length() && equation.substring(i + 1, i + 3).equals("1)")) {
+                    result.append("-1 ");
+                    i += 1;
+                    continue;
+                }
                 readOperator(equation, i, operators, result);
             } else {
                 throw new InputException("Incorrect symbol");
@@ -119,12 +124,6 @@ public class Converter {
 
     private static void readOperator(String equation, int i, Stack<Character> operators, StringBuilder result) {
         char currentChar = equation.charAt(i);
-        if (currentChar == '-' && i + 3 < equation.length() && equation.substring(i + 1, i + 3).equals("1)")) {
-            result.append("-1 ");
-            operators.pop();
-            i += 2;
-            return;
-        }
         while (!operators.isEmpty() && OPERATORS.get(currentChar) <= OPERATORS.get(operators.peek())) {
             result.append(operators.pop());
             result.append(" ");
