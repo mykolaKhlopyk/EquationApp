@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/equation")
@@ -62,6 +64,13 @@ public class EquationController {
             return "redirect:/equation/"+equation_id+"/roots?error="+exception.getMessage();
         }
         return "redirect:/equation/"+equation_id+"/roots";
+    }
+
+    @GetMapping("/find-equations-with-one-root")
+    public String findEquationsWithOneRoot(Model model){
+        List<Equation> equationsWithOneRoot = equationService.getEquationsWithOneRoot();
+        model.addAttribute("equations", equationsWithOneRoot);
+        return "index";
     }
 
 

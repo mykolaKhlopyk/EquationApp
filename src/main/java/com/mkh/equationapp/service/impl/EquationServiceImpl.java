@@ -74,4 +74,9 @@ public class EquationServiceImpl implements EquationService {
     public static boolean areEqual(double a, double b) {
         return Math.abs(a - b) < exp;
     }
+
+    @Override
+    public List<Equation> getEquationsWithOneRoot() {
+        return equationRepository.findAllWithOneRoot();
+    }
 }

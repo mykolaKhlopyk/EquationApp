@@ -14,4 +14,6 @@ public interface EquationService {
     void deleteRoot(long root_id);
 
     void addRoot(long equation_id, String newRootStr);
+
+    List<Equation> getEquationsWithOneRoot();
 }
